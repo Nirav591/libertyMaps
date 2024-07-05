@@ -8,7 +8,13 @@ const createUser = (user, callback) => {
     db.query('INSERT INTO users SET ?', user, callback);
 };
 
+const getAllUsers = (callback) => {
+    db.query('SELECT * FROM users', callback);
+};
+
+
 module.exports = {
     getUserByEmail,
     createUser,
+    getAllUsers
 };

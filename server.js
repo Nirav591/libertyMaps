@@ -9,6 +9,7 @@ app.use(express.json());
 
 app.use('/auth', authRoutes);
 app.use('/otp', otpRoutes);
+app.use('/api', userRoutes);
 
 const PORT = 6360;
 app.listen(PORT, () => {
