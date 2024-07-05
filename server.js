@@ -10,7 +10,7 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/otp', otpRoutes);
 
-const PORT = 6350;
+const PORT = 6360;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
