@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const otpRoutes = require('./routes/otpRoutes');
+const otpRoutes = require('./routes/userRoutes');
 require('dotenv').config();
 
 const app = express();
