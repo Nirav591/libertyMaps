@@ -7,7 +7,7 @@ const otpRoutes = require('./routes/otpRoutes');
 const userRoutes = require('./routes/userRoutes');
 const companyRoutes = require('./routes/companyRoutes');
 const customerRoutes = require('./routes/customerRoutes');
-const transactionRoutes = require('./routes/transactionRoutes');
+
 
 require('dotenv').config();
 
