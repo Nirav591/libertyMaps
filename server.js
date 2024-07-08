@@ -7,6 +7,7 @@ const otpRoutes = require('./routes/otpRoutes');
 const userRoutes = require('./routes/userRoutes');
 const companyRoutes = require('./routes/companyRoutes');
 const customerRoutes = require('./routes/customerRoutes');
+const transactionRoutes = require('./routes/transactionRoutes');
 
 require('dotenv').config();
 
@@ -36,6 +37,7 @@ app.use('/otp', otpRoutes);
 app.use('/api', userRoutes);
 app.use('/companies', companyRoutes);
 app.use('/customers', customerRoutes);
+app.use('/transactions', transactionRoutes);
 
 const PORT = process.env.PORT || 6360;
 app.listen(PORT, () => {
