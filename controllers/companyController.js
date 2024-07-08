@@ -29,20 +29,8 @@ const getCompanyById = async (req, res) => {
     }
 };
 
-const getAllCompanies = async (req, res) => {
-    try {
-        const companies = await companyModel.getAllCompanies();
-        res.json(companies);
-    } catch (error) {
-        console.error('Error fetching companies:', error);
-        res.status(500).json({ error: 'Server error' });
-    }
-};
-
-
 module.exports = {
     createCompany,
     getCompanyById,
-    getAllCompanies
     // Add other controller functions as needed
 };
