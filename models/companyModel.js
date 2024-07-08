@@ -1,21 +1,20 @@
-const db = require('../config/db');
+// companyModel.js
 
-const Company = {
-    create: (name, mobile, callback) => {
-        db.query('INSERT INTO companies (name, mobile) VALUES (?, ?)', [name, mobile], callback);
-    },
-    getAll: callback => {
-        db.query('SELECT * FROM companies', callback);
-    },
-    getById: (id, callback) => {
-        db.query('SELECT * FROM companies WHERE company_id = ?', [id], callback);
-    },
-    updateById: (id, name, mobile, callback) => {
-        db.query('UPDATE companies SET name = ?, mobile = ? WHERE company_id = ?', [name, mobile, id], callback);
-    },
-    deleteById: (id, callback) => {
-        db.query('DELETE FROM companies WHERE company_id = ?', [id], callback);
+const db = require('../config/db'); // Assuming you have a database configuration
+
+const createCompany = async (companyData) => {
+    const { companyName, mobile, companyId } = companyData;
+    const query = 'INSERT INTO companies (company_name, mobile, company_id) VALUES (?, ?, ?)';
+    const values = [companyName, mobile, companyId];
+
+    try {
+        const result = await db.query(query, values);
+        return result;
+    } catch (error) {
+        throw error;
     }
 };
 
-module.exports = Company;
+module.exports = {
+    createCompany,
+};
