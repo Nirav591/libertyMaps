@@ -27,7 +27,15 @@ const getTotalCreditsAndDebits = async (req, res) => {
     }
 };
 
+// Example function to format and display SQL query results
+const displaySQLQueryResults = (results) => {
+    results.forEach(result => {
+        console.log(`ID: ${result.id}, Customer ID: ${result.customer_id}, Type: ${result.type}, Amount: ${result.amount}, Reason: ${result.reason}, Date: ${result.date}, Reference Number: ${result.reference_number}, Name: ${result.name}, Created At: ${result.created_at}`);
+    });
+};
+
 module.exports = {
     createTransaction,
     getTotalCreditsAndDebits,
+    displaySQLQueryResults, // Add this function if you want to display query results
 };
