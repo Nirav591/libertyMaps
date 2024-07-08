@@ -3,7 +3,7 @@
 const db = require('../config/db'); // Assuming you have a database configuration
 
 const createCustomer = async (customerId, customerName, customerMobile) => {
-    const query = 'INSERT INTO customers (customer_id, customer_name, customer_mobile) VALUES (?, ?, ?)';
+    const query = 'INSERT INTO customers (customer_name, customer_mobile) VALUES (?, ?, ?)';
     const values = [customerId, customerName, customerMobile];
 
     try {
