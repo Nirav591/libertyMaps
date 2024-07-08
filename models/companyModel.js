@@ -34,23 +34,17 @@ const getCompanyById = async (companyId) => {
     }
 };
 
-const getAllCompanies = async (req, res) => {
+const getAllCompanies = async () => {
+    const query = `
+        SELECT id, company_name, mobile, created_at
+        FROM companies
+    `;
+    
     try {
-        const companies = await companyModel.getAllCompanies();
-        // Filter out circular references here if necessary
-        const companiesJson = JSON.stringify(companies, (key, value) => {
-            if (typeof value === 'object' && value !== null) {
-                if (key === 'someCircularProperty') {
-                    return undefined; // Exclude specific circular property
-                }
-                // Add more conditions as needed to handle circular references
-            }
-            return value;
-        });
-        res.send(companiesJson);
+        const result = await db.query(query);
+        return result; // Return array of companies
     } catch (error) {
-        console.error('Error fetching companies:', error);
-        res.status(500).json({ error: 'Server error' });
+        throw error;
     }
 };
 
