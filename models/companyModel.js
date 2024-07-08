@@ -1,6 +1,6 @@
 // models/companyModel.js
 
-const db = require('./../config/db'); // Assuming you have a database connection
+const db = require('../db'); // Assuming you have a database connection
 
 const createCompany = async (companyData) => {
     const { company_name, mobile } = companyData;
@@ -34,8 +34,23 @@ const getCompanyById = async (companyId) => {
     }
 };
 
+const getAllCompanies = async () => {
+    const query = `
+        SELECT id, company_name, mobile, created_at
+        FROM companies
+    `;
+    
+    try {
+        const result = await db.query(query);
+        return result; // Return array of companies
+    } catch (error) {
+        throw error;
+    }
+};
+
 module.exports = {
     createCompany,
     getCompanyById,
+    getAllCompanies,
     // Add other CRUD operations as needed
 };
