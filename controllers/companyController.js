@@ -32,14 +32,10 @@ const getCompanyById = async (req, res) => {
 const getAllCompanies = async (req, res) => {
     try {
         const companies = await companyModel.getAllCompanies();
-        const transformedCompanies = companies.map(company => ({
-            id: company.id,
-            company_name: company.company_name,
-            mobile: company.mobile,
-            created_at: company.created_at
-            // Add more fields as needed
-        }));
-        res.json(transformedCompanies);
+        if (!Array.isArray(companies)) {
+            return res.status(500).json({ error: 'Unexpected data format from database' });
+        }
+        res.json(companies);
     } catch (error) {
         console.error('Error fetching companies:', error);
         res.status(500).json({ error: 'Server error' });
