@@ -1,56 +1,30 @@
 // models/companyModel.js
 
-const db = require('../config/db'); // Assuming you have a database connection
+const db = require('../config/db');
 
-const createCompany = async (companyData) => {
-    const { company_name, mobile } = companyData;
-    const query = `
-        INSERT INTO companies (company_name, mobile, created_at)
-        VALUES (?, ?, NOW())
-    `;
-    const values = [company_name, mobile];
-    
-    try {
-        const result = await db.query(query, values);
-        return result.insertId; // Return the ID of the inserted company
-    } catch (error) {
-        throw error;
-    }
+const createCompany = async ({ company_name, mobile }) => {
+    const query = 'INSERT INTO companies (company_name, mobile, created_at) VALUES (?, ?, ?)';
+    const values = [company_name, mobile, new Date()];
+
+    const [result] = await db.query(query, values);
+    return result.insertId;
 };
 
 const getCompanyById = async (companyId) => {
-    const query = `
-        SELECT id, company_name, mobile, created_at
-        FROM companies
-        WHERE id = ?
-    `;
-    const values = [companyId];
-    
-    try {
-        const result = await db.query(query, values);
-        return result[0]; // Assuming there's only one company with this ID
-    } catch (error) {
-        throw error;
-    }
+    const query = 'SELECT * FROM companies WHERE id = ?';
+    const [rows] = await db.query(query, [companyId]);
+    return rows[0];
 };
 
 const getAllCompanies = async () => {
-    const query = `
-        SELECT id, company_name, mobile, created_at
-        FROM companies
-    `;
-    
-    try {
-        const result = await db.query(query);
-        return result; // Return array of companies
-    } catch (error) {
-        throw error;
-    }
+    const query = 'SELECT * FROM companies';
+    const [rows] = await db.query(query);
+    return rows;
 };
 
 module.exports = {
     createCompany,
     getCompanyById,
     getAllCompanies,
-    // Add other CRUD operations as needed
+    // Add other model functions as needed
 };
