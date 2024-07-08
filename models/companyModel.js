@@ -1,6 +1,6 @@
 // models/companyModel.js
 
-const db = require('../db'); // Assuming you have a database connection
+const db = require('./../config/db'); // Assuming you have a database connection
 
 const createCompany = async (companyData) => {
     const { company_name, mobile } = companyData;
