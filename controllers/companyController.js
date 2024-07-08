@@ -32,17 +32,14 @@ const getCompanyById = async (req, res) => {
 const getAllCompanies = async (req, res) => {
     try {
         const companies = await companyModel.getAllCompanies();
-        // Filter out circular references here if necessary
-        const companiesJson = JSON.stringify(companies, (key, value) => {
-            if (typeof value === 'object' && value !== null) {
-                if (key === 'someCircularProperty') {
-                    return undefined; // Exclude specific circular property
-                }
-                // Add more conditions as needed to handle circular references
-            }
-            return value;
-        });
-        res.send(companiesJson);
+        const transformedCompanies = companies.map(company => ({
+            id: company.id,
+            company_name: company.company_name,
+            mobile: company.mobile,
+            created_at: company.created_at
+            // Add more fields as needed
+        }));
+        res.json(transformedCompanies);
     } catch (error) {
         console.error('Error fetching companies:', error);
         res.status(500).json({ error: 'Server error' });
