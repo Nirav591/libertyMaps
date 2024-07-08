@@ -37,8 +37,6 @@ app.use('/otp', otpRoutes);
 app.use('/api', userRoutes);
 app.use('/companies', companyRoutes);
 app.use('/customers', customerRoutes);
-app.use('/transactions', transactionRoutes);
-
 const PORT = process.env.PORT || 6360;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
